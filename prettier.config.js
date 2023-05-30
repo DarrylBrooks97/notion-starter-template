@@ -8,9 +8,8 @@ module.exports = {
   importOrder: [
     "^(next/(.*)$)|^(next$)",
     "^(react/(.*)$)|^(react$)",
-    "^@/components/(.*)$|^components/(.*)$",
-    "^@/lib/(.*)$",
-    "^@/styles/(.*)$",
+    "^~/app/(.*)$|^components/(.*)$",
+    "^~/lib/(.*)$",
     "^[./]",
   ],
   importOrderSeparation: false,
