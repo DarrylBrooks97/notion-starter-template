@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { fetchAccessToken } from "../../../lib";
+import { fetchAccessToken, isError } from "../../../lib";
+import { users } from "~/schema";
+import { db } from "~/clients/drizzle";
+
 export const runtime = "edge";
 
 const incomingRequestSchema = z.object({
@@ -14,12 +17,18 @@ export async function POST(req: Request) {
 
     const authData = await fetchAccessToken(code);
 
-    if ("error" in authData) {
+    if (isError(authData)) {
       return new Response(JSON.stringify({ message: authData.error_description }), { status: 500 });
     }
 
-    // TODO: Save authorize data to Vercel Postgres
-    // const vals = authData;
+    const { access_token, bot_id, workspace_id, workspace_name } = authData;
+
+    await db.insert(users).values({
+      accessToken: access_token,
+      workspaceId: workspace_id,
+      workspaceName: workspace_name,
+      workspaceIcon: bot_id,
+    });
 
     return new Response(JSON.stringify({ succes: true }), { status: 201 });
   } catch (e: any) {

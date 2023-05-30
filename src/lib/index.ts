@@ -35,3 +35,7 @@ export const fetchAccessToken = async (code: string) => {
 
   return (await oAuthPromise.json()) as OAuthResponse | OAuthError;
 };
+
+export const isError = (data: OAuthResponse | OAuthError): data is OAuthError => {
+  return "error" in data;
+};

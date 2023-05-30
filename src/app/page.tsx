@@ -1,6 +1,10 @@
+import { db } from "~/clients/drizzle";
 import ConnectButton from "./components/ConnectButton";
+import { users } from "~/schema";
 
-export default function Home() {
+export default async function Home() {
+  const _user = await db.select().from(users);
+
   return (
     <div className="text-white">
       <div className="flex flex-col items-center space-y-2">
