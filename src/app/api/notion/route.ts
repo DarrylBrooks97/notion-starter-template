@@ -40,6 +40,6 @@ export async function POST(req: Request) {
 
     const error = e.message;
 
-    return new Response(JSON.stringify({ error }), { status: 400 });
+    return new Response(JSON.stringify({ error }), { status: 500 });
   }
 }

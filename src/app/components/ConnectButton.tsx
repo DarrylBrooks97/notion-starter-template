@@ -1,16 +1,33 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import { CONSTANTS } from "../constants";
 import { useEffect } from "react";
 
 export default function ConnectButton() {
   const code = useSearchParams().get("code");
   const error = useSearchParams().get("error");
+  const page = useRouter();
 
   useEffect(() => {
+    const exchangeCodeForToken = async () => {
+      const tokenPromise = fetch("/api/notion", {
+        method: "POST",
+        body: JSON.stringify({ code }),
+      });
+
+      toast.promise(tokenPromise, {
+        loading: "Connecting to Notion...",
+        success() {
+          page.refresh();
+          return "Connected!";
+        },
+        error: "Failed to connect to Notion",
+      });
+    };
+
     if (code) {
-      toast.success(code);
+      exchangeCodeForToken();
     }
   }, [code]);
 
@@ -19,19 +36,8 @@ export default function ConnectButton() {
   }
 
   return (
-    <div>
-      <p>{code}</p>
+    <div className="rounded-md border border-gray-400 px-3 py-1">
+      <a href={process.env.NOTION_REDIRECT_URI}>Connect to Notion</a>
     </div>
   );
 }
-
-// {hasNotion ? (
-//   <>Connected!</>
-// ) : (
-//   <a
-//     href={CONSTANTS.NOTION_REDIRECT_URI}
-//     className="w-max rounded-md border border-slate-500 px-3 py-1 text-xl"
-//   >
-//     Connect to Notion
-//   </a>
-// )}

@@ -4,11 +4,11 @@ export const users = pgTable(
   "users",
   {
     id: serial("id").primaryKey(),
-    accessToken: varchar("accessToken", { length: 256 }),
-    workspaceId: varchar("workspaceId", { length: 256 }),
-    workspaceName: varchar("workspaceName", { length: 256 }),
-    workspaceIcon: varchar("workspaceIcon", { length: 256 }),
-    createdAt: date("createdAt"),
+    accessToken: varchar("accesstoken"),
+    workspaceId: varchar("workspaceid", { length: 256 }),
+    workspaceName: varchar("workspacename", { length: 256 }),
+    workspaceIcon: varchar("workspaceicon", { length: 256 }),
+    createdAt: date("createdat"),
   },
   (users) => {
     return {

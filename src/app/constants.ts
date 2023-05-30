@@ -7,4 +7,8 @@ const envSchema = z.object({
   POSTGRES_URL: z.string().nonempty(),
 });
 
-export const CONSTANTS = envSchema.parse(process.env);
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv extends z.infer<typeof envSchema> {}
+  }
+}

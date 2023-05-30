@@ -1,4 +1,3 @@
-import { CONSTANTS } from "../app/constants";
 import { OAuthResponse, OAuthError } from "../types/notion.type";
 
 const baseURL =
@@ -7,9 +6,9 @@ const baseURL =
     : "http://localhost:3000";
 
 export const encodeTokens = () => {
-  return Buffer.from(`${CONSTANTS.NOTION_CLIENT_ID}:${CONSTANTS.NOTION_CLIENT_SECRET}`).toString(
-    "base64",
-  );
+  return Buffer.from(
+    `${process.env.NOTION_CLIENT_ID}:${process.env.NOTION_CLIENT_SECRET}`,
+  ).toString("base64");
 };
 
 export const fetchAccessToken = async (code: string) => {
