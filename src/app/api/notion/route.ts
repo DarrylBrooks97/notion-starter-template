@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { fetchAccessToken, isError } from "../../../lib";
+import { isError } from "~/lib";
+import { fetchAccessToken } from "~/lib/authorization";
 import { users } from "~/schema";
 import { db } from "~/clients/drizzle";
 
