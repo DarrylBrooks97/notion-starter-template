@@ -11,6 +11,8 @@
     "format": "prettier \"**/*.{css,js,json,jsx,ts,tsx}\""
   },
   "dependencies": {
+    "@notionhq/client": "^2.2.5",
+    "@radix-ui/react-icons": "^1.3.0",
     "@vercel/postgres": "^0.3.0",
     "drizzle-orm": "^0.26.3",
     "eslint": "8.41.0",

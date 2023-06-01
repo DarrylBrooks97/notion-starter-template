@@ -1,3 +1,4 @@
+import { SearchResponse } from "@notionhq/client/build/src/api-endpoints";
 export type OAuthResponse = {
   access_token: string;
   bot_id: string;
@@ -16,3 +17,7 @@ export type OAuthError = {
 export type Owner = {
   workspace: boolean;
 };
+
+export type ExtractInner<T> = T extends { [key: string]: infer U } ? U : never;
+
+export type SearchResults = ExtractInner<Pick<SearchResponse, "results">>;
