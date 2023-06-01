@@ -1,8 +1,8 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
-export default function Footer() {
+export default function Header() {
   return (
-    <div className="-mt-3 flex w-full justify-start p-3 text-white md:w-full md:max-w-5xl">
+    <header className="flex w-full items-end p-2 text-white">
       <a
         className="flex w-full items-center duration-100 ease-in-out hover:text-slate-400"
         href="https://github.com/DarrylBrooks97/notion-starter-template"
@@ -12,6 +12,6 @@ export default function Footer() {
         <GitHubLogoIcon />
         <p className="ml-2">Github</p>
       </a>
-    </div>
+    </header>
   );
 }
