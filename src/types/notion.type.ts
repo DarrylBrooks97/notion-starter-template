@@ -8,16 +8,12 @@ export type OAuthResponse = {
   workspace_id: string;
   workspace_name: string;
 };
-
 export type OAuthError = {
   error: string;
   error_description: string;
 };
-
 export type Owner = {
   workspace: boolean;
 };
-
 export type ExtractInner<T> = T extends { [key: string]: infer U } ? U : never;
-
 export type SearchResults = ExtractInner<Pick<SearchResponse, "results">>;

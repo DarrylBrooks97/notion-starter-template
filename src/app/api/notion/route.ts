@@ -1,14 +1,18 @@
 import { z } from "zod";
-import { isError } from "~/lib";
 import { fetchAccessToken } from "~/lib/authorization";
 import { users } from "~/schema";
 import { db } from "~/clients/drizzle";
+import { OAuthResponse, OAuthError } from "~/types/notion.type";
 
 export const runtime = "edge";
 
 const incomingRequestSchema = z.object({
   code: z.string().nonempty(),
 });
+
+export const isError = (data: OAuthResponse | OAuthError): data is OAuthError => {
+  return "error" in data;
+};
 
 export async function POST(req: Request) {
   const body = await req.json();

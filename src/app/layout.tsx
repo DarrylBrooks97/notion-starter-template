@@ -1,11 +1,12 @@
-import { Inter } from "next/font/google";
 import "./styles/globals.css";
-import BaseToast from "./components/BaseToast";
-import Footer from "./components/Footer";
+import { Inter } from "next/font/google";
+import Toaster from "./components/BaseToast";
+import Header from "./components/Header";
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Notion Starter Template",
   description: "A starter template for Notion",
 };
@@ -16,11 +17,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-black">
       <body className={inter.className}>
-        <BaseToast />
-        <main className="h-screen w-screen p-3 text-white md:mx-auto md:h-[95%] md:w-screen md:max-w-5xl">
+        <Toaster />
+        <Header />
+        <main className="h-screen w-screen grow p-3 text-white md:mx-auto md:h-full md:max-w-5xl">
           {children}
         </main>
-        <Footer />
       </body>
     </html>
   );

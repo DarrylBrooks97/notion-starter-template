@@ -1,12 +1,13 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { toast } from "sonner";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function ConnectButton() {
   const code = useSearchParams().get("code");
   const error = useSearchParams().get("error");
+
   const page = useRouter();
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function ConnectButton() {
     if (code) {
       exchangeCodeForToken();
     }
-  }, [code]);
+  }, [code, page]);
 
   if (error) {
     toast.success(error);
