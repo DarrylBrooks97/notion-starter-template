@@ -10,7 +10,7 @@ const incomingRequestSchema = z.object({
   code: z.string().nonempty(),
 });
 
-export const isError = (data: OAuthResponse | OAuthError): data is OAuthError => {
+const isError = (data: OAuthResponse | OAuthError): data is OAuthError => {
   return "error" in data;
 };
 
