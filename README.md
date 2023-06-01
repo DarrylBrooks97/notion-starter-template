@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Notion Starter Template 📝
 
-## Getting Started
+A simple Notion template showcasing how to fetch user's notion pages on their behalf
 
-First, run the development server:
+## What's inside?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Zod
+- Drizzle ORM
+- Vercel Postgres
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## The setup
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone repo
+2. Create a public [Notion integration](https://www.notion.so/help/create-integrations-with-the-notion-api#create-an-internal-integration)
+3. Update `.env.example` with your Notion keys
+4. Create a [Vercel Postgres Database](https://vercel.com/docs/storage/vercel-postgres/quickstart) (or any db of your choice)
+   4.1 Create pgTable with the following schema:
+   ```postgres
+   create table users (
+   id serial primary key,
+   accessToken varchar,
+   workspaceId varchar,
+   workspaceName varchar,
+   workspaceIcon varchar,
+   createdAt timestamp default now()
+   )
+   ```
+5. Setup Drizzle with Vercel's [helpful docs](https://vercel.com/docs/storage/vercel-postgres/using-an-orm#drizzle)
+6. Run [npm/yarn/pnpm] dev
