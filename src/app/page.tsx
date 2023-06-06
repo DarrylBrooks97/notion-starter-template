@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const userCookies = cookies();
-  const { value: userId } = userCookies.get("userId");
+  const userId = userCookies.get("userId")?.value;
   let user;
 
   if (userId) {

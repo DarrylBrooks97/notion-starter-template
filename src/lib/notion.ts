@@ -40,7 +40,7 @@ export const formatPages = (page: SearchResults) => {
 export const getNotionPages = async () => {
   try {
     const userCookies = cookies();
-    const { value: userId } = userCookies.get("userId");
+    const userId = userCookies.get("userId")?.value;
 
     if (!userId) {
       console.log("No user id found");
