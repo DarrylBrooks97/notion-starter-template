@@ -1,7 +1,7 @@
 import { OAuthResponse, OAuthError } from "~/types/notion.type";
 
 const redirectURI =
-  process.env.NODE_ENV === "production" ? process.env.VERCEL_URL : "http://localhost:3000";
+  process.env.NODE_ENV === "production" ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export const encodeTokens = () => {
   return Buffer.from(
