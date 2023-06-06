@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import { getClient } from "~/clients/notion";
 import { users } from "~/schema";
 import { SearchResults } from "~/types/notion.type";
+import { cookies } from "next/headers";
+import { eq } from "drizzle-orm";
 
 type TransformedPage = {
   id: string;
@@ -37,7 +39,18 @@ export const formatPages = (page: SearchResults) => {
 
 export const getNotionPages = async () => {
   try {
-    const user = await db.select().from(users);
+    const userCookies = cookies();
+    const userId = userCookies.get("userId").value;
+
+    if (!userId) {
+      console.log("No user id found");
+      redirect("/");
+    }
+
+    const user = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, parseInt(userId)));
 
     if (!user.length) {
       console.log("No user found");
