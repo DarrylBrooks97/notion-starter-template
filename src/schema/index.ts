@@ -1,9 +1,9 @@
-import { pgTable, serial, date, varchar, uniqueIndex } from "drizzle-orm/pg-core";
+import { pgTable, date, varchar, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 
 export const users = pgTable(
   "users",
   {
-    id: serial("id").primaryKey(),
+    id: uuid("id").primaryKey(),
     accessToken: varchar("accesstoken"),
     workspaceId: varchar("workspaceid", { length: 256 }),
     workspaceName: varchar("workspacename", { length: 256 }),

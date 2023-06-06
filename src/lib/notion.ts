@@ -40,17 +40,14 @@ export const formatPages = (page: SearchResults) => {
 export const getNotionPages = async () => {
   try {
     const userCookies = cookies();
-    const userId = userCookies.get("userId").value;
+    const { value: userId } = userCookies.get("userId");
 
     if (!userId) {
       console.log("No user id found");
       redirect("/");
     }
 
-    const user = await db
-      .select()
-      .from(users)
-      .where(eq(users.id, parseInt(userId)));
+    const user = await db.select().from(users).where(eq(users.id, userId));
 
     if (!user.length) {
       console.log("No user found");

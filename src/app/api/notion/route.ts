@@ -3,6 +3,7 @@ import { fetchAccessToken } from "~/lib/authorization";
 import { users } from "~/schema";
 import { db } from "~/clients/drizzle";
 import { OAuthResponse, OAuthError } from "~/types/notion.type";
+import { v4 as uuidv4 } from "uuid";
 
 export const runtime = "edge";
 
@@ -28,17 +29,15 @@ export async function POST(req: Request) {
 
     const { access_token, bot_id, workspace_id, workspace_name } = authData;
 
-    const userId = Math.floor(Math.random() * 1000000);
+    const userId = uuidv4();
 
-    await db
-      .insert(users)
-      .values({
-        id: userId,
-        accessToken: access_token,
-        workspaceId: workspace_id,
-        workspaceName: workspace_name,
-        workspaceIcon: bot_id,
-      });
+    await db.insert(users).values({
+      id: userId,
+      accessToken: access_token,
+      workspaceId: workspace_id,
+      workspaceName: workspace_name,
+      workspaceIcon: bot_id,
+    });
 
     return new Response(JSON.stringify({ succes: true }), {
       status: 201,

@@ -9,20 +9,17 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const userCookies = cookies();
-  const userId = userCookies.get("userId").value;
+  const { value: userId } = userCookies.get("userId");
   let user;
 
   if (userId) {
-    user = await db
-      .select()
-      .from(users)
-      .where(eq(users.id, parseInt(userId)));
+    user = await db.select().from(users).where(eq(users.id, userId));
   }
 
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center space-y-2">
       <h1 className="text-center text-4xl">Notion Template</h1>
-      {user.length ? <ViewPagesButton /> : <ConnectButton />}
+      {user ? <ViewPagesButton /> : <ConnectButton />}
     </div>
   );
 }
