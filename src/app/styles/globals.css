@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[cmdk-group-heading] {
+  color: #6f6f6f;
+}

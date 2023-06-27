@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import ConnectButton from "./components/ConnectButton";
 import ViewPagesButton from "./components/ViewPagesButton";
 import { eq } from "drizzle-orm";
+import CommandInput from "./components/Command";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,7 @@ export default async function Home() {
     <div className="flex h-screen w-full flex-col items-center justify-center space-y-2">
       <h1 className="text-center text-4xl">Notion Template</h1>
       {user ? <ViewPagesButton /> : <ConnectButton />}
+      <CommandInput />
     </div>
   );
 }

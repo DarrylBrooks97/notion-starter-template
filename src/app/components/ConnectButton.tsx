@@ -38,7 +38,9 @@ export default function ConnectButton() {
 
   return (
     <div className="rounded-md border border-gray-400 px-3 py-1">
-      <a href={process.env.NOTION_REDIRECT_URI}>Connect to Notion</a>
+      <a href={process.env.NOTION_REDIRECT_URI} suppressHydrationWarning>
+        Connect to Notion
+      </a>
     </div>
   );
 }
